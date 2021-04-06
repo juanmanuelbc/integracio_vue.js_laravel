@@ -27,7 +27,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titol' => ['string', 'required'],
+            'imatge' => ['string', 'required'],
+            'descripcio' => ['string', 'required'],
+            'contingut' => ['string', 'required']
+        ]);
+        
+        $post = new TPost();
+
+        $post->titol = $request->input('titol');
+        $post->imatge  = $request->input('imatge');
+        $post->descripcio = $request->input('descripcio');
+        $post->contingut = $request->input('contingut');
+
+        $post->save();
+
+        return response()->json($post);
     }
 
     /**
@@ -38,7 +54,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = TPost::findOrFail($id);
+
+        return response()->json($post);
     }
 
     /**
@@ -50,7 +68,23 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'titol' => ['string', 'required'],
+            'imatge' => ['string', 'required'],
+            'descripcio' => ['string', 'required'],
+            'contingut' => ['string', 'required']
+        ]);
+
+        $post = TPost::findOrFail($id);
+
+        $post->titol = $request->input('titol');
+        $post->imatge  = $request->input('imatge');
+        $post->descripcio = $request->input('descripcio');
+        $post->contingut = $request->input('contingut');
+
+        $post->save();
+
+        return response()->json($post);
     }
 
     /**
@@ -61,6 +95,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = TPost::findOrFail($id);
+
+        $post->delete();
+
+        return response()->json($post);
     }
 }

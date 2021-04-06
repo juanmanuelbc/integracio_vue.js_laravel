@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class TUsuari
@@ -27,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TUsuari extends Model
 {
+	use SoftDeletes;
+	
 	protected $table = 't_usuari';
 
 	protected $fillable = [

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ComentariController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::get('/hola', function () {
 });
 
 Route::apiResource('post', PostController::class);
+
+Route::apiResource('/post/{post}/comentari', ComentariController::class);

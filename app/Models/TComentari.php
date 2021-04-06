@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class TComentari
@@ -26,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TComentari extends Model
 {
+	use SoftDeletes;
+
 	protected $table = 't_comentari';
 
 	protected $casts = [

@@ -12,9 +12,11 @@ class ComentariController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idPost)
     {
-        //
+        $comentaris = TComentari::where('idPost', $idPost)->get();
+
+        return response()->json($comentaris);
     }
 
     /**
@@ -23,9 +25,21 @@ class ComentariController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $idPost)
     {
-        //
+        $request->validate([
+            'text' => ['string', 'required']
+        ]);
+        
+        $comentari = new TComentari();
+
+        $comentari->text = $request->input('text');
+
+        $comentari->idPost = $idPost;
+
+        $comentari->save();
+
+        return response()->json($comentari);
     }
 
     /**
@@ -34,9 +48,11 @@ class ComentariController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idPost, $id)
     {
-        //
+        $comentari = TComentari::findOrFail($id);
+
+        return response()->json($comentari);
     }
 
     /**
@@ -46,9 +62,19 @@ class ComentariController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idPost, $id)
     {
-        //
+        $request->validate([
+            'text' => ['string', 'required']
+        ]);
+        
+        $comentari = TComentari::findOrFail($id);
+
+        $comentari->text = $request->input('text');
+
+        $comentari->save();
+
+        return response()->json($comentari);
     }
 
     /**
@@ -57,8 +83,12 @@ class ComentariController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idPost, $id)
     {
-        //
+        $comentari = TComentari::findOrFail($id);
+
+        $comentari->delete();
+
+        return response()->json($comentari);
     }
 }
