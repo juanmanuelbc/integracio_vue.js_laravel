@@ -7,6 +7,12 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@gitlab.imasmallorca.net:desenvolupament/llibreries-php/imas-keycloak-api-guard.git"
+        }
+    ],
     "require": {
         "php": "^7.3|^8.0",
         "fideloper/proxy": "^4.4",
@@ -22,7 +28,8 @@
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3",
-        "reliese/laravel": "^1.1"
+        "reliese/laravel": "^1.1",
+        "robsontenorio/laravel-keycloak-guard": "dev-master"
     },
     "config": {
         "optimize-autoloader": true,

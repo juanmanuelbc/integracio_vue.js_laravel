@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ComentariController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +19,22 @@ Route::get('/hola', function () {
     return 'Hola món!!!';
 });
 
-Route::apiResource('post', PostController::class);
+Route::get('/post', [PostController::class, 'index']);
+Route::get('/post/{post}', [PostController::class, 'show']);
 
-Route::apiResource('/post/{post}/comentari', ComentariController::class);
+Route::get('/post/{post}/comentari', [ComentariController::class, 'index']);
+Route::get('/post/{post}/comentari/{comentari}', [ComentariController::class, 'show']);
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/protected-hola', function () {
+        return 'Hola món protegit!!!';
+    });
+
+    Route::post('/post', [PostController::class, 'store']);
+    Route::put('/post/{post}', [PostController::class, 'update']);
+    Route::delete('/post/{post}', [PostController::class, 'destroy']);
+
+    Route::post('/post/{post}/comentari', [ComentariController::class, 'store']);
+    Route::put('/post/{post}/comentari/{comentari}', [ComentariController::class, 'update']);
+    Route::delete('/post/{post}/comentari/{comentari}', [ComentariController::class, 'destroy']);
+});
