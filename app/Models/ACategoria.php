@@ -27,8 +27,8 @@ class ACategoria extends Model
 		'nom'
 	];
 
-	public function r_categoria_post()
+	public function posts()
 	{
-		return $this->hasOne(RCategoriaPost::class, 'idCategoria');
+		return $this->belongsToMany(TPost::class, 'r_categoria_post', 'idCategoria', 'idPost');
 	}
 }

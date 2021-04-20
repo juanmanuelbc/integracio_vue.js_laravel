@@ -14,9 +14,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = TPost::all();
+        $posts = TPost::select()->with('usuari')
+                                ->with('categories')
+                                ->with('comentaris')->get();
 
-        return response()->json($posts);
+        return response()->json(['posts' => $posts]);
     }
 
     /**
@@ -56,7 +58,7 @@ class PostController extends Controller
     {
         $post = TPost::findOrFail($id);
 
-        return response()->json($post);
+        return response()->json(['post' => $post]);
     }
 
     /**

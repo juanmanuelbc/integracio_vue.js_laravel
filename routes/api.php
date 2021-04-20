@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ComentariController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\UsuariController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,8 @@ Route::get('/post/{post}', [PostController::class, 'show']);
 Route::get('/post/{post}/comentari', [ComentariController::class, 'index']);
 Route::get('/post/{post}/comentari/{comentari}', [ComentariController::class, 'show']);
 
+Route::get('/static/categories', [CategoriaController::class, 'index']);
+
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/protected-hola', function () {
         return 'Hola món protegit!!!';
@@ -37,4 +41,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/post/{post}/comentari', [ComentariController::class, 'store']);
     Route::put('/post/{post}/comentari/{comentari}', [ComentariController::class, 'update']);
     Route::delete('/post/{post}/comentari/{comentari}', [ComentariController::class, 'destroy']);
+
+    Route::get('/me', [UsuariController::class, 'me']);
 });

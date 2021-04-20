@@ -52,9 +52,9 @@ class TPost extends Model
 		return $this->belongsTo(TUsuari::class, 'idUsuari');
 	}
 
-	public function r_categoria_post()
+	public function categories()
 	{
-		return $this->hasOne(RCategoriaPost::class, 'idPost');
+		return $this->belongsToMany(ACategoria::class, 'r_categoria_post', 'idPost', 'idCategoria');
 	}
 
 	public function comentaris()
